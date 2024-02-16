@@ -1,10 +1,11 @@
 package com.eddy.authserver.db;
 
+import com.eddy.authserver.dto.Constants;
+import com.eddy.data.EddyConstants;
+import com.eddy.data.exception.DBClientException;
 import com.google.common.base.Strings;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.mchange.v2.c3p0.DataSources;
-import com.podaddy.authserver.dto.Constants;
-import com.podaddy.data.common.exception.DBClientException;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.annotation.Resource;
@@ -28,11 +29,11 @@ public class PGPooledClient {
 
     private static final int DEFAULT_PORT = 5432;
 
-    private String dbName = Constants.DB_NAME;
-    private String dbHost = Constants.DEFAULT_DB_HOST;
-    private String dbUser = Constants.DB_LOCAL_USER;
-    private String dbPassword = Constants.DB_LOCAL_PASSWORD;
-    private int dbPort = Constants.DB_PORT;
+    private String dbName = EddyConstants.DB_NAME;
+    private String dbHost = EddyConstants.DEFAULT_DB_HOST;
+    private String dbUser = EddyConstants.DB_USER;
+    private String dbPassword = EddyConstants.DB_PASSWORD;
+    private int dbPort = EddyConstants.DB_PORT;
 
     @Resource
     private ApplicationContext applicationContext;
@@ -53,9 +54,9 @@ public class PGPooledClient {
 
     @PostConstruct
     public void init() throws PropertyVetoException, SQLException {
-        dbHost = StringUtils.isEmpty(getProperty(Constants.DB_HOST_VAR)) ? dbHost : getProperty(Constants.DB_HOST_VAR);
-        dbUser = StringUtils.isEmpty(getProperty(Constants.DB_USER_VAR)) ? dbUser : getProperty(Constants.DB_USER_VAR);
-        dbPassword = StringUtils.isEmpty(getProperty(Constants.DB_PASS_VAR)) ? dbPassword : getProperty(Constants.DB_PASS_VAR);
+        dbHost = StringUtils.isEmpty(getProperty(EddyConstants.DB_HOST_VAR)) ? dbHost : getProperty(EddyConstants.DB_HOST_VAR);
+        dbUser = StringUtils.isEmpty(getProperty(EddyConstants.DB_USER_VAR)) ? dbUser : getProperty(EddyConstants.DB_USER_VAR);
+        dbPassword = StringUtils.isEmpty(getProperty(EddyConstants.DB_PASS_VAR)) ? dbPassword : getProperty(EddyConstants.DB_PASS_VAR);
         comboPooledDataSource = initPooledDataSource(dbHost, dbUser, dbPassword);
     }
 
@@ -65,7 +66,7 @@ public class PGPooledClient {
 
     private ComboPooledDataSource initPooledDataSource(String host, String user, String password) throws PropertyVetoException {
         ComboPooledDataSource comboPooledDataSource = applicationContext.getBean(ComboPooledDataSource.class);
-        comboPooledDataSource.setDriverClass(Constants.JDBC_DRIVER_CLASS);
+        comboPooledDataSource.setDriverClass(EddyConstants.JDBC_DRIVER_CLASS);
         comboPooledDataSource.setJdbcUrl("jdbc:postgresql://" + host + ":" + dbPort + "/" + dbName);
         if (!Strings.isNullOrEmpty(user) && !Strings.isNullOrEmpty(password)) {
             comboPooledDataSource.setPassword(password);

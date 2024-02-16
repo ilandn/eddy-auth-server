@@ -1,14 +1,13 @@
 package com.eddy.authserver.config;
 
+import com.eddy.authserver.dto.EddyUser;
 import com.eddy.authserver.services.UserService;
+import com.eddy.data.exception.DBClientException;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import com.podaddy.authserver.dto.PodaddyUser;
-import com.podaddy.authserver.services.UserService;
-import com.podaddy.data.common.exception.DBClientException;
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Bean;
@@ -138,23 +137,20 @@ public class AuthorizationServerConfig {
                         .collect(Collectors.toSet());
                 String id = null;
                 String email = null;
-                String firstName = null;
-                String lastName = null;
+                String username = null;
                 Integer role = null;
-                if (principal.getPrincipal() instanceof PodaddyUser) {
-                    id = ((PodaddyUser) principal.getPrincipal()).getId();
-                    email = ((PodaddyUser) principal.getPrincipal()).getEmail();
-                    firstName = ((PodaddyUser) principal.getPrincipal()).getFirstName();
-                    lastName = ((PodaddyUser) principal.getPrincipal()).getLastName();
-                    role = ((PodaddyUser) principal.getPrincipal()).getRole().getCode();
+                if (principal.getPrincipal() instanceof EddyUser) {
+                    id = ((EddyUser) principal.getPrincipal()).getId();
+                    email = ((EddyUser) principal.getPrincipal()).getEmail();
+                    username = ((EddyUser) principal.getPrincipal()).getUsername();
+                    role = ((EddyUser) principal.getPrincipal()).getRole().getCode();
                 } else if (principal.getPrincipal() instanceof DefaultOidcUser) {
                     try {
                         //todo: add Google & Facebook support
                         email = ((DefaultOidcUser) principal.getPrincipal()).getAttributes().get("email").toString();
-                        PodaddyUser user = userService.getUserByEmail(email);
+                        EddyUser user = userService.getUserByEmail(email);
                         id = user.getId();
-                        firstName = user.getFirstName();
-                        lastName = user.getLastName();
+                        username = user.getUsername();
                         role = user.getRole().getCode();
                     } catch (DBClientException e) {
                         throw new RuntimeException(e);
@@ -166,9 +162,8 @@ public class AuthorizationServerConfig {
                 if (role != null) {
                     context.getClaims().claim("role", role);
                 }
-                if (StringUtils.isNotEmpty(firstName) && StringUtils.isNotEmpty(lastName)) {
-                    context.getClaims().claim("firstName", firstName);
-                    context.getClaims().claim("lastName", lastName);
+                if (StringUtils.isNotEmpty(username)) {
+                    context.getClaims().claim("username", username);
                 }
             }
         };

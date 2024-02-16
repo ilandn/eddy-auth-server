@@ -55,11 +55,6 @@ public class UserRequest {
         return user;
     }
 
-    public User build() {
-        Role role = isAdvertiser ? Role.ADVERTISER : Role.PODCASTER;
-        return new User(username, email, password, role);
-    }
-
     public String getUsername() {
         return username;
     }
