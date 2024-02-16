@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Eddy Login</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+    <style>
+        html, body {
+          height: 100%;
+        }
+
+        body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+       .box {
+         text-align: center;
+         width: 500px;
+         background-color: #fff;
+         padding: 20px;
+         box-shadow: 0 2px 10px rgba(0,0,0,.3);
+       }
+
+       @media only screen and (max-width: 767px) {
+        .hide-on-mobile {
+          display: none;
+        }
+      }
+
+    </style>
+</head>
+<body>
+<img class="hide-on-mobile" src="https://zone-assets-api.vercel.app/assets/illustrations/illustration_login.svg" style="margin-right: 10px; text-align: center;">
+<div class="box">
+    <div class="container">
+        <form class="form-signin" method="post" action="/login">
+            <img src="https://static.wixstatic.com/media/3f4fbc_cec27fa212214b64bb402de872122dae~mv2.png/v1/crop/x_0,y_2727,w_8334,h_2880/fill/w_225,h_78,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/23207%20PEddy_sata_05-02.png">
+            <p>
+                <label for="username" class="sr-only">Username</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username" required
+                       autofocus>
+            </p>
+            <p>
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                       required>
+            </p>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+<!--            <a href="https://iam.eddy.io:9000/oauth2/authorization/apple" class="button">Apple</a>-->
+        </form>
+    </div>
+</div>
+</body>
+</html>
