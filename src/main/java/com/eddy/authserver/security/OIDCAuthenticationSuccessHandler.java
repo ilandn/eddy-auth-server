@@ -75,7 +75,7 @@ public class OIDCAuthenticationSuccessHandler implements AuthenticationSuccessHa
     }
 
     private static User buildNewUser(String username, String email) {
-        // Default role is parent in this scenario because advertisers should register as Podaddy users only.
+        // Default role is parent in this scenario because advertisers should register as Eddy users only.
         User user = new User(username, email, null, null, null, "", Role.ROLE_PARENT);
         user.setActive(false);
         user.setCreatedOn(new Date());

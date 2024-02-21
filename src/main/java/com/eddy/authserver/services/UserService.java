@@ -42,7 +42,7 @@ public class UserService implements UserDetailsService {
 
         try {
             conn = pgPooledClient.getConnection();
-            stmt = conn.prepareStatement("SELECT COUNT(*) FROM public.users WHERE LOWER(user_name)=LOWER(?)");
+            stmt = conn.prepareStatement("SELECT COUNT(*) FROM public.users WHERE LOWER(name)=LOWER(?)");
             stmt.setString(1, username);
             rs = stmt.executeQuery();
             if (rs.next()) {
@@ -173,7 +173,7 @@ public class UserService implements UserDetailsService {
 
         try {
             conn = pgPooledClient.getConnection();
-            stmt = conn.prepareStatement("SELECT * FROM public.users WHERE user_name=?");
+            stmt = conn.prepareStatement("SELECT * FROM public.users WHERE name=?");
             stmt.setString(1, username);
             rs = stmt.executeQuery();
             if (rs.next()) {
@@ -261,17 +261,17 @@ public class UserService implements UserDetailsService {
         if (grMap == null || grMap.isEmpty()) {
             return null;
         }
-        String[][] podArr = new String[grMap.size()][];
+        String[][] groupArr = new String[grMap.size()][];
 
         int num = 0;
         for (Map.Entry<String, Role> grEntry : grMap.entrySet()) {
             String grId = grEntry.getKey();
             Role role = grEntry.getValue();
-            podArr[num] = new String[]{grId, role.name()};
+            groupArr[num] = new String[]{grId, role.name()};
             num++;
         }
 
-        return podArr;
+        return groupArr;
     }
 
 }

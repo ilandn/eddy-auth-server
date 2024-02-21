@@ -85,7 +85,7 @@ public class AuthorizationServerConfig {
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .authorizationGrantType(AuthorizationGrantType.JWT_BEARER)
                 .redirectUri(EDDY_SITE)
-                .redirectUri(API_SERVER + "/login/oauth2/code/podaddy")
+                .redirectUri(API_SERVER + "/login/oauth2/code/eddy")
                 .redirectUri(API_SERVER + "/authorized")
                 .redirectUri(API_SERVER + "/api/auth/successAuth")
                 .redirectUri("http://127.0.0.1:3000")

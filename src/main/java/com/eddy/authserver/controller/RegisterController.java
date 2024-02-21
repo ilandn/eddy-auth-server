@@ -38,7 +38,7 @@ public class RegisterController {
             emailConfirmationService.sendConfirmationMail(token, userRequest);
             return ResponseEntity
                     .created(ServletUriComponentsBuilder.fromCurrentRequest().path("/users/{id}").buildAndExpand(uid).toUri())
-                    .body("PodAddy user created");
+                    .body("Eddy user created");
         } catch (EddyException e) {
             log.error("Fail to register user", e);
             return ResponseEntity.badRequest().body("Fail to register user, message: " + e.getMessage());

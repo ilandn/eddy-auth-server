@@ -55,7 +55,7 @@ public class EmailConfirmationService {
 
     private static final Logger log = LoggerFactory.getLogger(EmailConfirmationService.class);
 
-    private static final String APP_NAME = "PodAddy";
+    private static final String APP_NAME = "Eddy";
     private static final GsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
 
     @Resource(name = "pgPooledClient")
@@ -190,7 +190,7 @@ public class EmailConfirmationService {
                 .setAccessType("offline")
                 .build();
 
-        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setHost("iam.podaddy.io").setPort(8888).build();
+        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setHost("iam.eddygames.net").setPort(8888).build();
         return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 

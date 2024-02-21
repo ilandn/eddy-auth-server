@@ -45,7 +45,7 @@ public class PGPooledClient {
                 //restore to default
                 connection.setAutoCommit(true);
                 connection.close();
-                log.debug("Disconnected from podaddy database");
+                log.debug("Disconnected from eddy database");
             }
         } catch (SQLException e) {
             log.error("Fail to disconnect from database: ", e);
