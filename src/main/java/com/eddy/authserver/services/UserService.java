@@ -238,11 +238,13 @@ public class UserService implements UserDetailsService {
         Role role = Role.valueOf(rs.getString("role"));
 
         Map<String, Role> groupRoles = new HashMap<>();
-        String[][] groupRolesArr = (String[][]) rs.getArray("group_roles").getArray();
-        for (String[] gr : groupRolesArr) {
-            String groupId = gr[0];
-            Role grole = Role.valueOf(gr[1]);
-            groupRoles.put(groupId, grole);
+        if (rs.getArray("group_roles") != null) {
+            String[][] groupRolesArr = (String[][]) rs.getArray("group_roles").getArray();
+            for (String[] gr : groupRolesArr) {
+                String groupId = gr[0];
+                Role grole = Role.valueOf(gr[1]);
+                groupRoles.put(groupId, grole);
+            }
         }
         boolean active = rs.getBoolean("active");
         java.util.Date createdOn = null;
