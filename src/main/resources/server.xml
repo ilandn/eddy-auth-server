@@ -48,6 +48,16 @@
     <Service name="Catalina">
 
         <Connector executor="tomcatThreadPool"
+                   port="8443" protocol="HTTP/1.1"
+                   connectionTimeout="20000"
+                   redirectPort="9000"/>
+
+        <Connector executor="tomcatThreadPool"
+                   port="443" protocol="HTTP/1.1"
+                   connectionTimeout="20000"
+                   redirectPort="9000"/>
+
+        <Connector executor="tomcatThreadPool"
                    port="8080" protocol="HTTP/1.1"
                    connectionTimeout="20000"
                    redirectPort="9000"/>
@@ -56,9 +66,9 @@
                    maxThreads="150" SSLEnabled="true">
             <UpgradeProtocol className="org.apache.coyote.http2.Http2Protocol"/>
             <SSLHostConfig>
-                <Certificate certificateKeystoreFile="/usr/local/tomcat/conf/ssl/io.eddygames.net.jks"
+                <Certificate certificateKeystoreFile="/usr/local/tomcat/conf/ssl/iam.eddygames.net.jks"
                              certificateKeystorePassword="eddy123456"
-                             certificateKeyAlias="eddyserver"
+                             certificateKeyAlias="eddyauth"
                              type="RSA"/>
             </SSLHostConfig>
         </Connector>
